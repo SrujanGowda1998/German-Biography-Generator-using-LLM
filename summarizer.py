@@ -1,5 +1,6 @@
 from langchain_together import Together
 import os
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,7 +14,8 @@ class Summarizer:
             temperature=0.1,
             max_tokens=512,
             top_k=1,
-            together_api_key = os.getenv("TOGETHER_API_KEY")
+            # together_api_key = os.getenv("TOGETHER_API_KEY")
+            together_api_key = st.secrets["together"]["together_api_key"]
         )
 
 
