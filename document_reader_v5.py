@@ -1,6 +1,9 @@
 from summarizer import Summarizer
 import docx
+import os
+from dotenv import load_dotenv
 
+together_api_key = os.getenv("TOGETHER_API_KEY")
 
 def read_text_from_docx(file_path):
     """
