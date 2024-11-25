@@ -39,6 +39,7 @@ footer {
 
 footer a {
     color: #FFFFFF;
+    left: 0;
     text-decoration: none;
 }
 
@@ -67,22 +68,6 @@ def create_word_document(biography_text):
     doc_io.seek(0)
     return doc_io
 
-def load_sample_document():
-    """Load and return the sample document."""
-    with open("Transkript_sample_2.docx", "rb") as file:
-        return file.read()
-
-# Section for sample document download
-st.sidebar.markdown("### Test the App")
-st.sidebar.markdown("Don't have an interview transcript??!... We got you... Download a sample interview transcript below and test the app.")
-sample_doc_data = load_sample_document()
-st.sidebar.download_button(
-    label="Download Sample Document",
-    data=sample_doc_data,
-    file_name="Transkript_sample_2.docx",
-    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-)
-
 if 'biography_generated' not in st.session_state:
     st.session_state.biography_generated = False
 
@@ -94,7 +79,7 @@ if not st.session_state.biography_generated:
             biography_text = biography(document_text)
             st.session_state.biography_text = biography_text  # Store biography text in session state
             st.session_state.biography_generated = True
-            st.experimental_rerun()
+            st.rerun()  # Use st.rerun() instead of experimental_rerun()
 else:
     st.success("Biography generated successfully.")
     
@@ -112,7 +97,7 @@ else:
     if st.button("Generate new biography"):
         st.session_state.biography_generated = False
         st.session_state.biography_text = ""
-        st.experimental_rerun()
+        st.rerun()  
 
 # Add footer to the page
 st.markdown(footer_html, unsafe_allow_html=True)
