@@ -202,7 +202,7 @@ if not st.session_state.biography_generated:
             biography_text = biography(document_text)
             st.session_state.biography_text = biography_text  # Store biography text in session state
             st.session_state.biography_generated = True
-            st.experimental_rerun()
+            st.rerun()
 else:
     st.success("Biography generated successfully.")
     
@@ -220,7 +220,7 @@ else:
     if st.button("Generate new biography"):
         st.session_state.biography_generated = False
         st.session_state.biography_text = ""
-        st.experimental_rerun()
+        st.rerun()
 
 # Add footer to the page
 st.markdown(footer_html, unsafe_allow_html=True)
